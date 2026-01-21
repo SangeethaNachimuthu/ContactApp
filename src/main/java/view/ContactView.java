@@ -27,9 +27,8 @@ public class ContactView {
 
     public int readChoice() {
 
-        int choice;
         System.out.print("\nSelect the option: ");
-        return choice = scanner.nextInt();
+        return scanner.nextInt();
     }
 
     public Contact getUserInput() {

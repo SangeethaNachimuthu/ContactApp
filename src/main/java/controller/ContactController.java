@@ -2,6 +2,7 @@ package controller;
 
 import dao.ContactDAO;
 import exception.DuplicateContactException;
+import exception.ExceptionHandler;
 import exception.NameNotFoundException;
 import model.Contact;
 import view.ContactView;
@@ -11,12 +12,14 @@ import java.util.List;
 
 public class ContactController {
 
-    private ContactDAO dao;
-    private ContactView view;
+    private final ContactDAO dao;
+    private final ContactView view;
+    private final ExceptionHandler handler;
 
     public ContactController(ContactDAO dao, ContactView view) {
         this.dao = dao;
         this.view = view;
+        handler = new ExceptionHandler();
     }
 
     public void run() {
@@ -36,14 +39,14 @@ public class ContactController {
                     } catch (DuplicateContactException e) {
                         view.displayError("duplicate");
                     } catch (IOException e) {
-                        view.displayError("io:" + e.getMessage());
+                        handler.handle(e);
                     }
                     break;
                 case 2:
                     try {
                         view.displayAllContacts(dao.findAll());
                     } catch (IOException e) {
-                        view.displayError("io:" + e.getMessage());
+                        handler.handle(e);
                     }
                     break;
                 case 3:
@@ -51,7 +54,7 @@ public class ContactController {
                         List<Contact> contacts = (dao.findByName(view.getName()));
                         view.displayByName(contacts);
                     } catch (IOException e) {
-                        view.displayError("io:" + e.getMessage());
+                        handler.handle(e);
                     } catch (NameNotFoundException e) {
                         view.displayError("name");
                     }
