@@ -25,8 +25,10 @@ public class ContactController {
             switch (choice) {
                 case 1:
                     dao.save(view.getUserInput());
+                    view.displayMessage("save");
                     break;
                 case 2:
+                    view.displayMessage("all");
                     dao.findAll();
                     break;
                 case 3:
@@ -34,9 +36,10 @@ public class ContactController {
                     break;
                 case 0:
                     running = false;
+                    view.displayMessage("exit");
                     break;
                 default:
-                    view.displayMessage();
+                    view.displayMessage("default");
             }
 
         }

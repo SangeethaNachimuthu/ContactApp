@@ -1,0 +1,8 @@
+package exception;
+
+public class ContactStorageException extends Exception {
+
+    public ContactStorageException(String message) {
+        super(message);
+    }
+}

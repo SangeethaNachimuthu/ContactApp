@@ -1,13 +1,16 @@
 package model;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Contact {
 
     private String name;
     private String phoneNumber;
 
     public Contact(String name, String phoneNumber) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.setName(name);
+        this.setPhoneNumber(phoneNumber);
     }
 
     public String getName() {
@@ -23,6 +26,10 @@ public class Contact {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+
+        if (!phoneNumber.matches("^\\d{10}$")) {
+            throw new IllegalArgumentException("Invalid phone number. Enter 10 digit phone number");
+        }
         this.phoneNumber = phoneNumber;
     }
 }

@@ -33,7 +33,6 @@ public class ContactView {
 
     public Contact getUserInput() {
 
-
         String name = IO.readln("Enter Name: ");
         String phoneNumber = IO.readln("Enter PhoneNumber: ");
 
@@ -45,7 +44,19 @@ public class ContactView {
         return IO.readln("Enter Name: ");
     }
 
-    public void displayMessage() {
-        System.out.println("Invalid option. Try again!");
+    public void displayMessage(String message) {
+        if (message.equalsIgnoreCase("save")) {
+            System.out.println("Contact added successfully\n");
+        }
+        else if (message.equalsIgnoreCase("all")) {
+            System.out.println("All Contacts:");
+        }
+        else if (message.equalsIgnoreCase("exit")) {
+            System.out.println("Good Bye, Thanks for using Contact App.");
+        }
+        else {
+            System.out.println("Invalid option. Try again!");
+        }
+
     }
 }
