@@ -57,6 +57,15 @@ public class ContactView {
         else {
             System.out.println("Invalid option. Try again!");
         }
+    }
 
+    public void displayError(String message) {
+
+        if (message.equalsIgnoreCase("duplicate")) {
+            System.out.println("Duplicate Contact.\n");
+        }
+        else {
+            System.out.println("File Error: " + message.substring(3) + "\n");
+        }
     }
 }

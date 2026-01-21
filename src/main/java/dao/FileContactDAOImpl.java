@@ -1,5 +1,6 @@
 package dao;
 
+import exception.DuplicateContactException;
 import model.Contact;
 
 import java.io.BufferedWriter;
@@ -19,7 +20,21 @@ public class FileContactDAOImpl implements ContactDAO{
     }
 
     @Override
-    public void save(Contact contact) {
+    public void save(Contact contact) throws IOException, DuplicateContactException {
+
+        List<String> contactList = Files.readAllLines(Path.of("dir/contactList.txt"));
+
+        for (String line : contactList) {
+            String[] parts = line.split(",");
+
+            if (parts.length >= 2) {
+                String phone = parts[1].trim();
+
+                if (phone.equalsIgnoreCase(contact.getPhoneNumber())) {
+                    throw new DuplicateContactException("Duplicate Contact.");
+                }
+            }
+        }
 
         try (
                 BufferedWriter writer = Files.newBufferedWriter(
@@ -28,15 +43,10 @@ public class FileContactDAOImpl implements ContactDAO{
                     StandardOpenOption.APPEND
                 );
         ) {
-            writer.append(contact.getName());
-            writer.append(", ");
-            writer.append(contact.getPhoneNumber());
+            writer.append(contact.getName() + ", " + contact.getPhoneNumber());
             writer.newLine();
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
     }
 
     @Override

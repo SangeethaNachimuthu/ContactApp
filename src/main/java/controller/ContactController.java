@@ -1,7 +1,10 @@
 package controller;
 
 import dao.ContactDAO;
+import exception.DuplicateContactException;
 import view.ContactView;
+
+import java.io.IOException;
 
 public class ContactController {
 
@@ -24,8 +27,14 @@ public class ContactController {
 
             switch (choice) {
                 case 1:
-                    dao.save(view.getUserInput());
-                    view.displayMessage("save");
+                    try {
+                        dao.save(view.getUserInput());
+                        view.displayMessage("save");
+                    } catch (DuplicateContactException e) {
+                        view.displayError("duplicate");
+                    } catch (IOException e) {
+                        view.displayError("io:" + e.getMessage());
+                    }
                     break;
                 case 2:
                     view.displayMessage("all");

@@ -1,11 +1,17 @@
 package dao;
 
+import exception.DuplicateContactException;
 import model.Contact;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface ContactDAO {
 
     public List<Contact> findAll();
-    public void save(Contact contact);
+
+    public void save(Contact contact)
+            throws IOException, DuplicateContactException;
+
     public Contact findByName(String name);
 }
