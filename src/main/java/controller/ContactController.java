@@ -38,7 +38,11 @@ public class ContactController {
                     break;
                 case 2:
                     view.displayMessage("all");
-                    dao.findAll();
+                    try {
+                        dao.findAll();
+                    } catch (IOException e) {
+                        view.displayError("io:" + e.getMessage());
+                    }
                     break;
                 case 3:
                     dao.findByName(view.getName());

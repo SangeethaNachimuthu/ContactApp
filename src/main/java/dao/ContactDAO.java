@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ContactDAO {
 
-    public List<Contact> findAll();
+    public void findAll() throws IOException;
 
     public void save(Contact contact)
             throws IOException, DuplicateContactException;

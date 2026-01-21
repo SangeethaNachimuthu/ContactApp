@@ -15,8 +15,14 @@ public class FileContactDAOImpl implements ContactDAO{
     private Path filePath;
 
     @Override
-    public List<Contact> findAll() {
-        return List.of();
+    public void findAll() throws IOException {
+
+        List<String> contacts = Files.readAllLines(Path.of("dir/contactList.txt"));
+
+        for (String s : contacts) {
+            System.out.println(s);
+        }
+        System.out.println();
     }
 
     @Override
