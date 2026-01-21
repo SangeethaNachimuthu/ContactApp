@@ -3,9 +3,11 @@ package controller;
 import dao.ContactDAO;
 import exception.DuplicateContactException;
 import exception.NameNotFoundException;
+import model.Contact;
 import view.ContactView;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ContactController {
 
@@ -46,7 +48,8 @@ public class ContactController {
                     break;
                 case 3:
                     try {
-                        dao.findByName(view.getName());
+                        List<Contact> contacts = (dao.findByName(view.getName()));
+                        view.displayByName(contacts);
                     } catch (IOException e) {
                         view.displayError("io:" + e.getMessage());
                     } catch (NameNotFoundException e) {

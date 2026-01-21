@@ -67,6 +67,17 @@ public class FileContactDAOImpl implements ContactDAO{
         List<String> lines = Files.readAllLines(Path.of("dir/contactList.txt"));
         List<Contact> matchedList = new ArrayList<>();
 
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            if (parts.length >= 2) {
+                if (parts[0].equalsIgnoreCase(searchName)) {
+                    matchedList.add(new Contact(parts[0].trim(), parts[1].trim()));
+                }
+            }
+        }
+        if (matchedList.isEmpty()) {
+            throw new NameNotFoundException("Contact not found.");
+        }
         return matchedList;
     }
 }

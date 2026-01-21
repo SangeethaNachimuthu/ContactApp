@@ -54,6 +54,15 @@ public class ContactView {
         System.out.println();
     }
 
+    public void displayByName(List<Contact> contacts) {
+
+        System.out.println("Matched Contacts:");
+        for (Contact c : contacts) {
+            System.out.println(c.getName() + ", " + c.getPhoneNumber());
+        }
+        System.out.println();
+    }
+
     public void displayMessage(String message) {
         if (message.equalsIgnoreCase("save")) {
             System.out.println("Contact added successfully\n");

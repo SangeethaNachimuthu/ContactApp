@@ -1,10 +1,8 @@
 import controller.ContactController;
 import dao.ContactDAO;
 import dao.FileContactDAOImpl;
-import exception.DuplicateContactException;
 import view.ContactView;
 
-import java.io.IOException;
 
 public class Main {
 
