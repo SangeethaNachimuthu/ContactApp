@@ -2,6 +2,7 @@ package view;
 
 import model.Contact;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ContactView {
@@ -44,12 +45,18 @@ public class ContactView {
         return IO.readln("Enter Name: ");
     }
 
+    public void displayAllContacts(List<Contact> contacts) {
+
+        System.out.println("All Contacts:");
+        for (Contact c : contacts) {
+            System.out.println(c.getName() + ", " + c.getPhoneNumber());
+        }
+        System.out.println();
+    }
+
     public void displayMessage(String message) {
         if (message.equalsIgnoreCase("save")) {
             System.out.println("Contact added successfully\n");
-        }
-        else if (message.equalsIgnoreCase("all")) {
-            System.out.println("All Contacts:");
         }
         else if (message.equalsIgnoreCase("exit")) {
             System.out.println("Good Bye, Thanks for using Contact App.");
@@ -63,6 +70,9 @@ public class ContactView {
 
         if (message.equalsIgnoreCase("duplicate")) {
             System.out.println("Duplicate Contact.\n");
+        }
+        else if (message.equalsIgnoreCase("name")) {
+            System.out.println("Name not found.\n");
         }
         else {
             System.out.println("File Error: " + message.substring(3) + "\n");
