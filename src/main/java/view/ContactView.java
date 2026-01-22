@@ -9,11 +9,6 @@ public class ContactView {
 
     Scanner scanner = new Scanner(System.in);
 
-    public String getUserInput(String prompt) {
-
-        return "";
-    }
-
     public void displayMenu() {
 
         System.out.println("Contact App");
