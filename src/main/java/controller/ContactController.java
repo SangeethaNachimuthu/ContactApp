@@ -1,6 +1,7 @@
 package controller;
 
 import dao.ContactDAO;
+import exception.ContactStorageException;
 import exception.DuplicateContactException;
 import exception.ExceptionHandler;
 import exception.NameNotFoundException;
@@ -35,36 +36,37 @@ public class ContactController {
                 case 1:
                     try {
                         dao.save(view.getUserInput());
-                        view.displayMessage("save");
+                        view.displayMessage("Contact Saved Successfully!");
                     } catch (DuplicateContactException e) {
-                        view.displayError("duplicate");
+                        view.displayError("Duplicate Contact.\n");
                     } catch (IOException e) {
                         handler.handle(e);
                     }
                     break;
                 case 2:
                     try {
-                        view.displayAllContacts(dao.findAll());
-                    } catch (IOException e) {
+                        view.displayContacts(dao.findAll());
+                    } catch (ContactStorageException e) {
                         handler.handle(e);
                     }
                     break;
                 case 3:
                     try {
                         List<Contact> contacts = (dao.findByName(view.getName()));
-                        view.displayByName(contacts);
-                    } catch (IOException e) {
-                        handler.handle(e);
+                        view.displayContacts(contacts);
                     } catch (NameNotFoundException e) {
-                        view.displayError("name");
+                        System.out.println();
+                        view.displayError("Name not found");
+                    }  catch (IOException e) {
+                        handler.handle(e);
                     }
                     break;
                 case 0:
                     running = false;
-                    view.displayMessage("exit");
+                    view.displayMessage("Good Bye. Thanks for using the Contact App.");
                     break;
                 default:
-                    view.displayMessage("default");
+                    view.displayMessage("Invalid Option. Try again.");
             }
 
         }

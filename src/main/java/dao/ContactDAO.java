@@ -1,5 +1,6 @@
 package dao;
 
+import exception.ContactStorageException;
 import exception.DuplicateContactException;
 import exception.NameNotFoundException;
 import model.Contact;
@@ -10,7 +11,7 @@ import java.util.List;
 public interface ContactDAO {
 
     public List<Contact> findAll()
-            throws IOException;
+            throws ContactStorageException;
 
     public void save(Contact contact)
             throws IOException, DuplicateContactException;

@@ -11,13 +11,11 @@ public class ContactView {
 
     public void displayMenu() {
 
-        System.out.println("Contact App");
-        System.out.println("------------");
+        System.out.println("----- Contact App -----");
         System.out.println("1. Add contact");
         System.out.println("2. Display All Contacts");
         System.out.println("3. Find Contact by Name");
         System.out.println("0. Exit");
-
     }
 
     public int readChoice() {
@@ -39,46 +37,28 @@ public class ContactView {
         return IO.readln("Enter Name: ");
     }
 
-    public void displayAllContacts(List<Contact> contacts) {
+    public void displayContacts(List<Contact> contacts) {
 
-        System.out.println("All Contacts:");
+        System.out.println("\nAll Contacts:");
         for (Contact c : contacts) {
             System.out.println(c.getName() + ", " + c.getPhoneNumber());
         }
         System.out.println();
     }
 
-    public void displayByName(List<Contact> contacts) {
-
-        System.out.println("Matched Contacts:");
-        for (Contact c : contacts) {
-            System.out.println(c.getName() + ", " + c.getPhoneNumber());
-        }
-        System.out.println();
-    }
+      public void displayContact(Contact contact) {
+            if (contact == null) {
+                System.out.println("Contact not found.");
+            } else {
+                System.out.println("Found : " + contact);
+            }
+      }
 
     public void displayMessage(String message) {
-        if (message.equalsIgnoreCase("save")) {
-            System.out.println("Contact added successfully\n");
-        }
-        else if (message.equalsIgnoreCase("exit")) {
-            System.out.println("Good Bye, Thanks for using Contact App.");
-        }
-        else {
-            System.out.println("Invalid option. Try again!");
-        }
+        System.out.println(message);
     }
 
     public void displayError(String message) {
-
-        if (message.equalsIgnoreCase("duplicate")) {
-            System.out.println("Duplicate Contact.\n");
-        }
-        else if (message.equalsIgnoreCase("name")) {
-            System.out.println("Name not found.\n");
-        }
-        else {
-            System.out.println("File Error: " + message.substring(3) + "\n");
-        }
+        System.err.println(message);
     }
 }
