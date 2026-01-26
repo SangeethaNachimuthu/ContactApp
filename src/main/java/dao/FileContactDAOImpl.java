@@ -23,15 +23,15 @@ public class FileContactDAOImpl implements ContactDAO{
         try {
             List<String>  lines = Files.readAllLines(Path.of("dir/contactList.txt"));
 
-        List<Contact> contacts = new ArrayList<>();
+            List<Contact> contacts = new ArrayList<>();
 
-        for (String line : lines) {
-            String[] parts = line.split(",");
-            if (parts.length >= 2) {
-                contacts.add(new Contact(parts[0].trim(), parts[1].trim()));
+            for (String line : lines) {
+                String[] parts = line.split(",");
+                if (parts.length >= 2) {
+                    contacts.add(new Contact(parts[0].trim(), parts[1].trim()));
+                }
             }
-        }
-        return contacts;
+            return contacts;
         } catch (IOException e) {
             throw new ContactStorageException("Failed to load contacts from storage.", e);
         }

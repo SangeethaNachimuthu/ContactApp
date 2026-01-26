@@ -10,12 +10,11 @@ import java.util.List;
 
 public interface ContactDAO {
 
-    public List<Contact> findAll()
-            throws ContactStorageException;
+    List<Contact> findAll() throws ContactStorageException;
 
-    public void save(Contact contact)
-            throws IOException, DuplicateContactException;
+    void save(Contact contact)
+            throws ContactStorageException, DuplicateContactException;
 
-    public List<Contact> findByName(String name)
-            throws IOException, NameNotFoundException;
+    List<Contact> findByName(String name)
+            throws ContactStorageException, NameNotFoundException;
 }
